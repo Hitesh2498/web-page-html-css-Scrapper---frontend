@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="popup.css" />
+    <title>Web Style Scraper</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h2>Web Style Scraper</h2>
+        <div class="auth-section">
+          <div class="auth-buttons" id="loggedOutButtons">
+            <button class="auth-btn" id="loginBtn">Login</button>
+            <button class="auth-btn" id="signupBtn">Signup</button>
+          </div>
+          <div class="auth-buttons" id="loggedInButtons" style="display: none">
+            <span class="user-email" id="userEmail"></span>
+            <button class="auth-btn" id="logoutBtn">Logout</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="usage-counter">
+        <div class="counter-wrapper">
+          <span class="counter-text">Scrapes Remaining Today:</span>
+          <span id="scrapeCounter" class="counter-number">5</span>
+        </div>
+        <div
+          id="scrapeWarning"
+          class="scrape-warning"
+          style="display: none"
+        ></div>
+      </div>
+
+      <div class="controls">
+        <button id="scrapeButton">Scrape Current Page</button>
+        <div class="format-options">
+          <select id="formatSelect">
+            <option value="combined">HTML + CSS</option>
+            <option value="html">HTML Only</option>
+            <option value="css">CSS Only</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="output-container">
+        <div class="output-header">
+          <span class="output-title">Output</span>
+          <div class="button-group">
+            <button id="downloadButton" disabled>Download</button>
+            <button id="copyButton">Copy to Clipboard</button>
+          </div>
+        </div>
+        <textarea id="outputText" readonly></textarea>
+      </div>
+
+      <div class="options">
+        <div class="checkbox-wrapper">
+          <input type="checkbox" id="includeInline" checked />
+          <label for="includeInline">Include Inline Styles</label>
+        </div>
+        <div class="checkbox-wrapper">
+          <input type="checkbox" id="includeExternal" checked />
+          <label for="includeExternal">Include External Stylesheets</label>
+        </div>
+      </div>
+    </div>
+
+    <div id="authModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="loginForm" class="auth-form">
+          <h3>Login</h3>
+          <input type="email" id="loginEmail" placeholder="Email" />
+          <input type="password" id="loginPassword" placeholder="Password" />
+          <button id="loginSubmit">Login</button>
+        </div>
+        <div id="signupForm" class="auth-form" style="display: none">
+          <h3>Sign Up</h3>
+          <input type="email" id="signupEmail" placeholder="Email" />
+          <input type="password" id="signupPassword" placeholder="Password" />
+          <button id="signupSubmit">Sign Up</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="notification" class="notification"></div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

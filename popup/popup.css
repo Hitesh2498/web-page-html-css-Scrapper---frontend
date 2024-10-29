@@ -1,0 +1,433 @@
+/* popup.css */
+
+.container {
+  width: 450px;
+  padding: 24px;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  background: #ffffff;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+h2 {
+  margin: 0 0 20px 0;
+  color: #1a1a1a;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  animation: slideDown 0.5s ease-out;
+}
+
+.controls {
+  margin-bottom: 20px;
+  animation: fadeIn 0.4s ease-out;
+}
+
+button {
+  background: linear-gradient(135deg, #4776e6, #8e54e9);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(71, 118, 230, 0.2);
+  position: relative;
+  overflow: hidden;
+  height: 32px;
+  min-width: 90px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+button:hover::before {
+  left: 100%;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(71, 118, 230, 0.25);
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(71, 118, 230, 0.15);
+}
+
+.format-options {
+  margin-top: 16px;
+  animation: slideIn 0.5s ease-out;
+}
+
+select {
+  padding: 8px 32px 8px 12px;
+  border-radius: 8px;
+  border: 1.5px solid rgba(225, 225, 225, 0.8);
+  width: 180px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  background: #ffffff;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%234776e6' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  height: 36px;
+}
+
+select:hover {
+  border-color: #4776e6;
+  transform: translateY(-1px);
+}
+
+select:focus {
+  outline: none;
+  border-color: #8e54e9;
+  box-shadow: 0 0 0 3px rgba(142, 84, 233, 0.15);
+}
+
+.output-container {
+  margin-top: 20px;
+  animation: slideUp 0.6s ease-out;
+}
+
+.output-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.output-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+textarea {
+  width: 100%;
+  height: 200px;
+  padding: 12px;
+  border: 1.5px solid rgba(225, 225, 225, 0.8);
+  border-radius: 8px;
+  resize: vertical;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  transition: all 0.3s ease;
+  background: rgba(250, 250, 250, 0.4);
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #8e54e9;
+  box-shadow: 0 0 0 3px rgba(142, 84, 233, 0.15);
+  background: #ffffff;
+}
+
+.options {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: fadeIn 0.7s ease-out;
+}
+
+.button-group {
+  display: flex;
+  gap: 12px;
+}
+
+.button-group button {
+  flex: 1;
+}
+
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  font-size: 13px;
+  color: #333;
+}
+
+.checkbox-wrapper:hover {
+  background: rgba(71, 118, 230, 0.05);
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid rgba(225, 225, 225, 0.8);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+input[type="checkbox"]:checked {
+  background: linear-gradient(135deg, #4776e6, #8e54e9);
+  border-color: transparent;
+}
+
+input[type="checkbox"]:checked::after {
+  content: "✓";
+  position: absolute;
+  color: white;
+  font-size: 11px;
+  font-weight: bold;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Loading state */
+@keyframes shimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+.loading {
+  animation: shimmer 1s linear infinite;
+  background: linear-gradient(
+    to right,
+    rgba(71, 118, 230, 0.1) 8%,
+    rgba(142, 84, 233, 0.2) 18%,
+    rgba(71, 118, 230, 0.1) 33%
+  );
+  background-size: 800px 104px;
+}
+
+/* Custom scrollbar for textarea */
+textarea::-webkit-scrollbar {
+  width: 8px;
+}
+
+textarea::-webkit-scrollbar-track {
+  background: rgba(225, 225, 225, 0.4);
+  border-radius: 4px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #4776e6, #8e54e9);
+  border-radius: 4px;
+}
+
+textarea::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #3d66cc, #7b48cc);
+}
+
+/* Add to existing popup.css */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.auth-btn {
+  min-width: 70px;
+  height: 28px;
+}
+
+.usage-counter {
+  background: linear-gradient(
+    135deg,
+    rgba(71, 118, 230, 0.1),
+    rgba(142, 84, 233, 0.1)
+  );
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.counter-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.counter-text {
+  font-size: 13px;
+  color: #333;
+}
+
+.counter-number {
+  font-size: 16px;
+  font-weight: 600;
+  color: #4776e6;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background: #fff;
+  padding: 24px;
+  border-radius: 16px;
+  width: 320px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.auth-form input {
+  padding: 8px 12px;
+  border: 1.5px solid rgba(225, 225, 225, 0.8);
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.close {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  cursor: pointer;
+  font-size: 20px;
+}
+/* Add to existing popup.css */
+
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.notification.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.notification.success {
+  background: linear-gradient(135deg, #4caf50, #45a049);
+}
+
+.notification.warning {
+  background: linear-gradient(135deg, #ff9800, #f57c00);
+}
+
+.notification.error {
+  background: linear-gradient(135deg, #f44336, #d32f2f);
+}
+
+.scrape-warning {
+  margin-top: 8px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #fff;
+  background: linear-gradient(135deg, #ff9800, #f57c00);
+  display: none;
+}
+
+.user-email {
+  font-size: 13px;
+  color: #4776e6;
+  margin-right: 8px;
+  font-weight: 500;
+}
+
+.auth-section {
+  display: flex;
+  align-items: center;
+}
