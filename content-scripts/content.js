@@ -146,7 +146,7 @@ function getAllStyles(options) {
           }
         });
       } catch (e) {
-        console.warn("Could not access stylesheet:", e);
+        return styles;
       }
     });
   }

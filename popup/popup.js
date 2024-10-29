@@ -135,6 +135,18 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   logoutBtn.onclick = () => {
+    const logoutModal = document.getElementById("logoutModal");
+    logoutModal.style.display = "block";
+    setTimeout(() => logoutModal.classList.add("show"), 10);
+  };
+
+  document.getElementById("cancelLogout").onclick = () => {
+    const logoutModal = document.getElementById("logoutModal");
+    logoutModal.classList.remove("show");
+    setTimeout(() => (logoutModal.style.display = "none"), 300);
+  };
+
+  document.getElementById("confirmLogout").onclick = () => {
     localStorage.clear();
     isLoggedIn = false;
     chrome.storage.sync.get(["remainingScrapes"], function (result) {
@@ -146,10 +158,9 @@ document.addEventListener("DOMContentLoaded", function () {
       downloadButton.disabled = true;
       showNotification("Successfully logged out", "success");
     });
-  };
-
-  closeBtn.onclick = () => {
-    modal.style.display = "none";
+    const logoutModal = document.getElementById("logoutModal");
+    logoutModal.classList.remove("show");
+    setTimeout(() => (logoutModal.style.display = "none"), 300);
   };
 
   document.getElementById("loginSubmit").onclick = async () => {
