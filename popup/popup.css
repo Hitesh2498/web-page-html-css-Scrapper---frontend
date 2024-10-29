@@ -362,6 +362,43 @@ textarea::-webkit-scrollbar-thumb:hover {
   gap: 16px;
 }
 
+.auth-form {
+  padding: 20px;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px;
+  border: 1.5px solid rgba(225, 225, 225, 0.8);
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.auth-form input:focus {
+  outline: none;
+  border-color: #8e54e9;
+  box-shadow: 0 0 0 3px rgba(142, 84, 233, 0.15);
+}
+
+.auth-form h3 {
+  margin: 0 0 20px 0;
+  color: #1a1a1a;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.auth-form button {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.modal-content {
+  min-width: 360px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
 .auth-form input {
   padding: 8px 12px;
   border: 1.5px solid rgba(225, 225, 225, 0.8);

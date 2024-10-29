@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let isLoggedIn = false;
   let remainingScrapes = 5;
   let isInitialized = false;
+  downloadButton.disabled = true;
 
   function showNotification(message, type = "success") {
     const notification = document.getElementById("notification");
@@ -47,6 +48,22 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  async function checkAndResetAnonymousScrapes() {
+    const lastResetDate = await chrome.storage.sync.get(["lastResetDate"]);
+    const now = new Date();
+    const today = now.toDateString();
+
+    if (!lastResetDate.lastResetDate || lastResetDate.lastResetDate !== today) {
+      await chrome.storage.sync.set({
+        remainingScrapes: 5,
+        lastResetDate: today,
+      });
+      remainingScrapes = 5;
+      updateCounter();
+      updateScrapeWarning();
+    }
+  }
+
   async function checkAuth() {
     if (isInitialized) return;
 
@@ -63,18 +80,9 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         if (response.ok) {
+          const data = await response.json();
           isLoggedIn = true;
-          const scrapesResponse = await fetch(
-            "http://localhost:3000/auth/get-scrapes",
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-              },
-            }
-          );
-          const scrapesData = await scrapesResponse.json();
-          remainingScrapes = scrapesData.remainingScrapes;
+          remainingScrapes = data.remainingScrapes;
           downloadButton.disabled = false;
           updateAuthUI(true, email);
         } else {
@@ -87,13 +95,9 @@ document.addEventListener("DOMContentLoaded", function () {
       handleAuthFailure();
     }
 
-    chrome.storage.sync.get(["remainingScrapes"], function (result) {
-      if (!isLoggedIn) {
-        remainingScrapes = result.remainingScrapes || 5;
-      }
-      updateCounter();
-      updateScrapeWarning();
-    });
+    if (!isLoggedIn) {
+      await checkAndResetAnonymousScrapes();
+    }
 
     isInitialized = true;
   }
@@ -103,7 +107,8 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.removeItem("userEmail");
     isLoggedIn = false;
     chrome.storage.sync.get(["remainingScrapes"], function (result) {
-      remainingScrapes = result.remainingScrapes || 5;
+      remainingScrapes =
+        result.remainingScrapes !== undefined ? result.remainingScrapes : 5;
       updateCounter();
     });
     downloadButton.disabled = true;
@@ -132,12 +137,15 @@ document.addEventListener("DOMContentLoaded", function () {
   logoutBtn.onclick = () => {
     localStorage.clear();
     isLoggedIn = false;
-    remainingScrapes = 5;
-    chrome.storage.sync.set({ remainingScrapes: 5 });
-    updateAuthUI(false);
-    updateCounter();
-    updateScrapeWarning();
-    showNotification("Successfully logged out", "success");
+    chrome.storage.sync.get(["remainingScrapes"], function (result) {
+      remainingScrapes =
+        result.remainingScrapes !== undefined ? result.remainingScrapes : 5;
+      updateAuthUI(false);
+      updateCounter();
+      updateScrapeWarning();
+      downloadButton.disabled = true;
+      showNotification("Successfully logged out", "success");
+    });
   };
 
   closeBtn.onclick = () => {
