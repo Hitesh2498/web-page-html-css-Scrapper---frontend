@@ -239,6 +239,9 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
+    const spinnerOverlay = document.querySelector(".spinner-overlay");
+    spinnerOverlay.style.display = "flex";
+
     const [tab] = await chrome.tabs.query({
       active: true,
       currentWindow: true,
@@ -275,6 +278,8 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     } catch (error) {
       showNotification("Failed to scrape page. Please try again.", "error");
+    } finally {
+      spinnerOverlay.style.display = "none";
     }
   });
 
